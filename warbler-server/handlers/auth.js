@@ -20,6 +20,7 @@ exports.signin = async function(req, res, next) {
     // result of our user.compare function
     let isMatch = await user.comparePassword(req.body.password);
     if (isMatch) {
+      // if successful password match then ...
       let token = jwt.sign(
         {
           id,

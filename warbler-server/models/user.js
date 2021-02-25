@@ -35,9 +35,12 @@ userSchema.pre("save", async function(next) {
 });
 
 userSchema.methods.comparePassword = async function(candidatePassword, next) {
+  // takes a plain text password and compares it to the password in the database
   try {
+    // no one can reverse the hash password
     let isMatch = await bcrypt.compare(candidatePassword, this.password);
     return isMatch;
+    // if same isMatch returns true
   } catch (err) {
     return next(err);
   }
