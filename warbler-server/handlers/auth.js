@@ -23,12 +23,14 @@ exports.signin = async function(req, res, next) {
       // if successful password match then ...
       let token = jwt.sign(
         {
+          // "id": id
           id,
           username,
           profileImageUrl
         },
         process.env.SECRET_KEY
       );
+      // if all goes well return status of 200
       return res.status(200).json({
         id,
         username,
@@ -41,6 +43,8 @@ exports.signin = async function(req, res, next) {
         message: "Invalid Email/Password."
       });
     }
+    // try / catch here
+    // everytime you write an async function you want to make sure you wrap that in a try / catch
   } catch (e) {
     return next({ status: 400, message: "Invalid Email/Password." });
   }
