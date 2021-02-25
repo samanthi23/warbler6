@@ -3,11 +3,21 @@ const jwt = require("jsonwebtoken");
 
 exports.signin = async function(req, res, next) {
   // finding a user
+  // then check if password matches 
+  // and then if it all matches log them in
+  // signing or creating a JSON web token
+  // and sending it back in the response
+  
   try {
+    // using db.User.findOne
+    // await for that promise to resolve
+    
     let user = await db.User.findOne({
       email: req.body.email
     });
+    // destructure 
     let { id, username, profileImageUrl } = user;
+    // result of our user.compare function
     let isMatch = await user.comparePassword(req.body.password);
     if (isMatch) {
       let token = jwt.sign(
